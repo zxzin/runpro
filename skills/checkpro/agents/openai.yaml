@@ -1,0 +1,7 @@
+interface:
+  display_name: "CheckPro"
+  short_description: "Checks high-score academic argument quality"
+  default_prompt: "Use $checkpro to review this paper for high-score academic quality. Start with a rubric ledger, then check academic standards, source-claim integrity, citation integrity, analysis depth, and a targeted repair plan."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Replace Words"
+  short_description: "Replace rewritten text while preserving source typography, paragraph settings, and native output"
+  default_prompt: "Use $replacewords to swap rewritten sentences into the source text while preserving the source font, font size, paragraph settings, and native .docx or .pptx output when possible, and only making minimal citation or person fixes."

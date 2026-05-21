@@ -1,0 +1,4 @@
+interface:
+  display_name: "Runpro"
+  short_description: "Run a project from a messy folder"
+  default_prompt: "Use $runpro to bootstrap this project folder, infer the deliverable, lock requirements and template/partial-scope boundaries, execute the work, validate the actual output, and drive it to a submission-ready state."

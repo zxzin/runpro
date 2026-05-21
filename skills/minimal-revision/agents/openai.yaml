@@ -1,0 +1,4 @@
+interface:
+  display_name: "Minimal Revision"
+  short_description: "Minimal-change fixes for accepted drafts"
+  default_prompt: "Use $minimal-revision to apply required revisions with the smallest possible edit footprint while preserving the existing wording, rhythm, and style."
