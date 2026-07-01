@@ -1,8 +1,8 @@
-# Codex Academic Delivery Skills
+# Run Pro
 
-Bilingual, source-grounded Codex skills for turning messy academic materials into submission-ready papers, revisions, and presentation decks.
+Run Pro is a bilingual, source-grounded Codex skill stack for turning messy academic materials into submission-ready papers, revisions, and presentation decks.
 
-This pack is built for English-first and bilingual workflows. Chinese trigger phrases are included where they are genuinely useful, but the core logic is not Chinese-only.
+The public repo is named after the orchestrator skill, `runpro`. The package also includes companion skills for audit, revision, deck production, and final delivery cleanup.
 
 ## What This Pack Does
 
@@ -63,7 +63,7 @@ Do not market this repo as:
 
 Market it as:
 
-> a bilingual academic delivery stack for Codex that goes from messy inputs to submission-ready outputs
+> Run Pro: a bilingual Codex delivery stack that goes from messy inputs to submission-ready outputs
 
 The strongest story is the full chain:
 
@@ -108,17 +108,11 @@ That demo sequence is more star-worthy than showing sentence rewriting alone.
 
 ## Repo Positioning
 
-If you want the broadest appeal, use an English-facing public name and description even if many users are bilingual.
-
-Strong public name candidates:
-
-- `codex-academic-delivery-skills`
-- `submission-ready-skills`
-- `paper-to-ppt-delivery-stack`
+Use `Run Pro` as the public name and `runpro` as the GitHub repository slug.
 
 Recommended short description:
 
-> Bilingual Codex skills for source-grounded academic writing, audit, format-preserving revision, paper-to-PPT delivery, and final submission cleanup.
+> Run Pro Codex skill stack for project-folder execution, academic delivery, audit, revision, and paper-to-PPT workflows.
 
 ## Included Directory Layout
 
