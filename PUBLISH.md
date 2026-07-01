@@ -2,7 +2,7 @@
 
 The repository is ready to publish as:
 
-`codex-academic-delivery-skills`
+`runpro`
 
 Recommended GitHub visibility:
 
@@ -10,15 +10,15 @@ Recommended GitHub visibility:
 
 Recommended GitHub description:
 
-> Bilingual Codex skills for source-grounded academic writing, conservative audit, format-preserving revision, paper-to-PPT delivery, and final submission cleanup.
+> Run Pro Codex skill stack for project-folder execution, academic delivery, audit, revision, and paper-to-PPT workflows.
 
 ## Option A: GitHub CLI
 
 If GitHub CLI is installed and authenticated:
 
 ```bash
-cd ~/Desktop/codex-academic-delivery-skills
-gh repo create codex-academic-delivery-skills --public --source=. --remote=origin --push
+cd ~/Desktop/runpro
+gh repo create runpro --public --source=. --remote=origin --push
 ```
 
 ## Option B: Existing GitHub Repo
@@ -26,8 +26,8 @@ gh repo create codex-academic-delivery-skills --public --source=. --remote=origi
 If you create an empty GitHub repo in the browser first:
 
 ```bash
-cd ~/Desktop/codex-academic-delivery-skills
-git remote add origin https://github.com/YOUR_NAME/codex-academic-delivery-skills.git
+cd ~/Desktop/runpro
+git remote add origin https://github.com/YOUR_NAME/runpro.git
 git push -u origin main
 ```
 

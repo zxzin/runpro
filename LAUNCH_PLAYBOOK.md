@@ -22,18 +22,18 @@ That framing will reduce trust and make the repo easier to dismiss.
 
 Best default:
 
-`codex-academic-delivery-skills`
+`Run Pro`
 
 Why:
 
-- clear
-- searchable
-- broad enough for papers, reports, and PPTs
-- still specific enough to signal real workflow value
+- short
+- easy to remember
+- aligned with the orchestrator skill name, `runpro`
+- broad enough to cover the companion academic delivery skills
 
 ## Recommended GitHub Description
 
-> Bilingual Codex skills for source-grounded academic writing, conservative audit, format-preserving revision, paper-to-PPT delivery, and final submission cleanup.
+> Run Pro Codex skill stack for project-folder execution, academic delivery, audit, revision, and paper-to-PPT workflows.
 
 ## Recommended README Hook
 
