@@ -9,6 +9,7 @@ Do not declare completion until this checklist has been reviewed.
 - For written deliverables with no explicitly required final format, the final submission artifact is `.docx`.
 - The latest requested revisions are reflected.
 - If the assignment gave explicit formatting rules, those rules were followed during drafting and not deferred entirely to end-stage cleanup.
+- The actual final artifact was checked for student-facing residue, including internal workflow notes, assistant/tool/prompt traces, AI-similarity wording, prior-assignment residue, file paths, helper filenames, and audit vocabulary.
 - No required quality step was skipped purely to save time or tokens.
 - The deliverable is complete enough to be judged against the full requirement set, not just as a draft shell.
 - The work is strong enough to target the `90+` score band rather than only bare acceptability.
@@ -52,6 +53,8 @@ Do not declare completion until this checklist has been reviewed.
 - For assignment-style document work, `scripts/validate_final_audit.py --require-academic-standards-audit` passes or the limitation is stated explicitly.
 - For source-backed written submissions, `scripts/validate_final_audit.py --require-source-claim-audit` passes or the limitation is stated explicitly.
 - For academic or source-backed graded written submissions, `scripts/validate_final_audit.py --require-academic-quality-audit` passes or the limitation is stated explicitly.
+- For any submitted, presented, exported, or handed-off final artifact, `scripts/validate_final_audit.py --require-student-facing-residue-audit` passes or the limitation is stated explicitly.
+- For any supported final artifact type, `scripts/scan_student_facing_residue.py <final artifact path>` passes after the last export, replacement, template assembly, or manual text edit.
 - For source-backed presentation work, `scripts/validate_final_audit.py --require-presentation-source-audit` passes or the limitation is stated explicitly.
 - For high-risk or graded submission work, `strict mode` was explicitly used and its fixed validation chain was completed.
 - The route-specific validations from `runpro_workspace/10_analysis/project-routing.md` were checked.
@@ -91,6 +94,7 @@ Do not declare completion until this checklist has been reviewed.
 - For assignment-style document work, if no explicit diagram style was required, inserted project flowcharts or process diagrams use black-and-white styling and do not rely on color coding for meaning.
 - For assignment-style document work, any format defects found in the final whole-document check were fixed and rechecked before handoff.
 - For assignment-style document work, any non-blocking but fixable citation or reference defect found in the micro-defect sweep was fixed and rechecked before handoff.
+- For assignment-style document work, student-facing text contains no process-language explanation about avoiding default ChatGPT output, avoiding classmates' phrasing, reducing AI detection, previous assignments, prior palliative/end-of-life work, or internal wording strategy.
 - For assignment-style document work, the final artifact still reads like the approved report type rather than a shortened memo or note.
 - For assignment-style document work, any table or visual used as part of the analysis has a visible caption/title when expected by the genre and does not look like a raw export artifact.
 - For academic or source-backed graded written submissions, meaningful analytical tables and visuals are interpreted in the surrounding prose and used to support conclusions, not merely inserted as information displays.
@@ -129,6 +133,8 @@ Do not declare completion until this checklist has been reviewed.
 - For scientific figure-led slides, conclusion-style titles are used where available and the dominant figure or table clearly outranks the interpretation text in visual hierarchy.
 - For scientific multi-panel slides, each visible panel has a distinct analytical role and redundant panels were removed or justified.
 - For visually polished PPT/PPTX work, text-heavy decks include a visual enrichment plan and use meaningful images, generated illustrations, diagrams, maps, source-object visuals, or figure-led layouts regularly enough that the deck does not read as repeated text cards.
+- For source-backed PPT/PPTX work, `source-visual-inventory.md` exists, was created before final slide drafting, and passed `scripts/validate_source_visual_inventory.py`.
+- For source-backed PPT/PPTX work, candidate visuals include selected/rejected status, inclusion/exclusion reason, and provenance or URL/file path; zero-picture decks include a validated zero-image rationale and a named non-picture visual substitute.
 - For PPT/PPTX work made from a report, essay, final paper, thesis, or manuscript, original data figures/images in the source document were inventoried, relevant ones were reused in the deck, and omissions were documented with reasons.
 - For PPT/PPTX work made from a report, essay, final paper, thesis, or manuscript, no relevant original data figure was replaced by a generic icon, AI-generated visual, redrawn approximation, or text-only summary.
 - For PPT/PPTX work with a speaker script, the script includes slide-number markers and the final audit confirms slide/script correspondence.
@@ -138,6 +144,7 @@ Do not declare completion until this checklist has been reviewed.
 - For source-backed or visual presentation work, every external supporting image used has full provenance recorded in the source log, notes, or final audit according to the assignment need; visible deck footers use only concise human-facing credits when needed.
 - For source-backed or visual presentation work, every generated image used was created with the current latest built-in Codex/ChatGPT image tool, logged with tool/model, prompt summary, date, and slide role, and was not used as a factual source or evidence substitute.
 - For presentation work, the visible deck and delivery script contain no internal workflow language such as `source log`, `final audit`, `working audit`, `requirement ledger`, `provenance recorded`, or `image credits are recorded`; source notes are human-facing credits or normal references only.
+- For any final deliverable, the visible artifact contains no `ChatGPT`, `Codex`, `RunPro`, `replacewords`, `prompt`, `AI-generated`, `runpro_workspace`, helper-script, or local-file-path residue unless the assignment explicitly requires those exact terms as content.
 - Efficiency decisions did not reduce required verification depth.
 - If any required item failed the audit, work continued until it passed or a true blocker remained.
 - If the work was still judged below the `90+` band, work continued until targeted repairs were exhausted or a true blocker remained.

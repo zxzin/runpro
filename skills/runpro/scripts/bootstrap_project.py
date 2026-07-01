@@ -201,6 +201,8 @@ pending
 - [ ] Rubric compliance audit passed when applicable
 - [ ] Academic standards audit passed when applicable
 - [ ] Source-claim integrity audit passed when applicable
+- [ ] Source visual inventory validated when applicable
+- [ ] Student-facing residue audit passed on final visible artifact text
 - [ ] Default report-table and process-diagram style rules were applied or explicitly overridden
 - [ ] All required assignment parts completed
 - [ ] Target score band is plausibly reachable or true blocker documented
@@ -221,6 +223,8 @@ pending
 ## Strict-Mode Validation Chain
 
 ## Final Format Check
+
+## Student-Facing Residue Audit
 
 ## Rubric Compliance Audit
 
@@ -279,6 +283,30 @@ pending
 ## What It Supports
 
 ## Notes
+""",
+    "10_analysis/source-visual-inventory.md": """# Source Visual Inventory
+
+Use this file for source-backed or visually polished presentation work before final slide drafting.
+
+## Visual Candidate V1
+
+### Source Or Search Path
+
+### Visual Type
+
+### URL Or File Path
+
+### Evidence Role
+
+### Status
+
+pending
+
+### Inclusion Or Exclusion Reason
+
+### Provenance Notes
+
+## Zero-Image Rationale
 """,
     "10_analysis/source-claim-audit.md": """# Source-Claim Integrity Audit
 

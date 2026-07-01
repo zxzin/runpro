@@ -10,6 +10,7 @@ Use this schema when the project starts from messy source material and you need 
 - `audience`: Who will read, review, approve, or receive it
 - `source_materials`: What inputs are available
 - `hard_constraints`: Deadlines, format rules, counts, required sections, must-have content
+- `topic_collision_risk`: Whether a chosen topic is likely to duplicate teacher examples, assignment-suggested examples, classmates' likely choices, generic AI-default suggestions, prior cohort work, or the user's previous submissions
 - `soft_preferences`: Tone, style, emphasis, examples, preferred framing
 - `scope_in`: What is clearly included
 - `scope_out`: What is clearly excluded
@@ -27,6 +28,7 @@ Use this schema when the project starts from messy source material and you need 
 - Merge repeated instructions into one normalized statement.
 - Keep change history only if it affects the final result.
 - Convert vague wishes into executable wording when safe.
+- Convert topic-differentiation concerns into explicit selection criteria instead of treating them as vague preferences.
 - Distinguish source facts from working assumptions.
 - Do not treat missing submitter identity fields as blockers or standalone questions. Keep them separate from content-critical unknowns.
 
@@ -58,6 +60,7 @@ Project type:
 Audience:
 Confirmed facts:
 Constraints:
+Topic collision risk:
 Validation needed:
 Blockers:
 Open questions:

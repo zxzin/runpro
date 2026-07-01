@@ -30,6 +30,7 @@ Use Arial/Aptos/Helvetica-like sans-serif. Do not use serif fonts.
 Default deck shell:
 
 - Slide 1 is a simple cover: title, presentation date, presenter.
+- Simple cover means content-minimal but visually complete; do not strand a small metadata block in a large blank field.
 - The cover must not contain agenda blocks, thesis previews, abstract text, or content cards.
 - The cover date is the actual talk/report date, not presentation duration or time limit.
 - The final slide contains only `Thank You` and `Questions & Discussion` by default; `Questions` is acceptable when shorter is better.
@@ -76,13 +77,17 @@ Layout:
 - presentation date
 - presenter name
 - optional course/module/institution only if provided or required
+- optional logo/brand mark or one relevant traceable image when needed for balance
 - restrained accent strip or small visual accent only; no content cards
 
 Rules:
 
 - Keep it simple and metadata-only.
+- Metadata-only is a content rule, not permission for a sparse page.
 - Use the actual presentation date, not speech duration.
 - Do not include thesis statements, agenda bullets, source notes, or discussion questions.
+- Reject covers where the title cluster sits in one corner or upper band and the rest is inert blank space.
+- A cover image, logo, or source/context visual is allowed when it supports visual balance and remains non-argumentative.
 - The cover should feel polished through typography, spacing, and alignment, not extra content.
 
 ## Recipe 2: Concept Map
@@ -402,6 +407,7 @@ Reject and redesign if you see:
 - replacing real data figures with generic icons, AI-generated imagery, redrawn approximations, or text-only summaries
 - cropping original figures so labels, axes, legends, or data marks become unreadable
 - cover slide overloaded with agenda, abstract, thesis preview, or content cards
+- cover slide with a tiny metadata cluster and a large unused blank field, even if it technically contains only required metadata
 - cramped title line spacing or title/subtitle collision
 - large empty vertical gap between the main content and bottom takeaway
 - a large card or panel whose content sits only at the upper-left corner

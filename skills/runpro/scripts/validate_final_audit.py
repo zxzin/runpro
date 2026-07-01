@@ -21,6 +21,7 @@ REQUIRED_SECTIONS = [
     "Estimated Score Band",
     "Strict-Mode Validation Chain",
     "Final Format Check",
+    "Student-Facing Residue Audit",
     "Requirement-By-Requirement Verdicts",
     "Completion Decision",
 ]
@@ -116,6 +117,9 @@ MIN_SOURCE_CLAIM_MARKER_GROUPS = 4
 PRESENTATION_AUDIT_MARKER_GROUPS = {
     "source log consistency": ("source-log", "source log", "verified source", "source audit"),
     "references/source separation": ("references", "sources used", "source slide", "reference slide"),
+    "source visual inventory": ("source-visual-inventory", "source visual inventory", "visual candidate", "candidate visual", "candidate image", "source visual candidate"),
+    "visual selection rationale": ("selected", "rejected", "included", "excluded", "inclusion reason", "exclusion reason", "selection rationale", "rejection rationale"),
+    "visual provenance": ("provenance", "traceable", "url", "file path", "image credit", "source/search path", "source or search path"),
     "source visual specificity": ("source object", "source visual", "book cover", "report cover", "source screenshot", "original figure"),
     "visual enrichment": ("visual enrichment", "image", "illustration", "diagram", "map", "visual anchor"),
     "generated image handling": ("generated image", "generated illustration", "built-in image", "image tool", "generated-asset"),
@@ -125,7 +129,97 @@ PRESENTATION_AUDIT_MARKER_GROUPS = {
     "rendered preview inspection": ("render", "preview", "visual inspection", "pptpro_audit", "strict audit"),
 }
 
-MIN_PRESENTATION_AUDIT_MARKER_GROUPS = 6
+MIN_PRESENTATION_AUDIT_MARKER_GROUPS = 8
+REQUIRED_PRESENTATION_AUDIT_MARKER_GROUPS = (
+    "source log consistency",
+    "source visual inventory",
+    "visual selection rationale",
+    "visual provenance",
+    "rendered preview inspection",
+)
+WEAK_PRESENTATION_VISUAL_ASSERTIONS = (
+    "no source object",
+    "no source visual",
+    "no source-native visual",
+    "no source native visual",
+    "no real image",
+    "no traceable image",
+    "no image was needed",
+    "no images were needed",
+    "visuals were not needed",
+    "no report-cover screenshot was needed",
+)
+
+STUDENT_FACING_RESIDUE_MARKER_GROUPS = {
+    "artifact and surfaces checked": (
+        "artifact",
+        "visible text",
+        "docx",
+        "pptx",
+        "pdf",
+        "header",
+        "footer",
+        "caption",
+        "table",
+        "comment",
+        "notes",
+    ),
+    "workflow or process language": (
+        "workflow",
+        "process",
+        "status note",
+        "internal note",
+        "production note",
+        "planning note",
+    ),
+    "assistant tool or prompt traces": (
+        "chatgpt",
+        "codex",
+        "runpro",
+        "replacewords",
+        "prompt",
+        "ai-generated",
+        "llm",
+        "tool trace",
+    ),
+    "anti-ai or prior-assignment residue": (
+        "ai similarity",
+        "ai detection",
+        "default chatgpt",
+        "same article",
+        "same essay",
+        "classmate",
+        "previous assignment",
+        "previous task",
+        "palliative",
+        "end-of-life",
+        "words/phrasing",
+    ),
+    "file path or audit vocabulary": (
+        "file path",
+        "workspace",
+        "runpro_workspace",
+        "source log",
+        "final audit",
+        "requirement ledger",
+        "rubric ledger",
+        "helper filename",
+    ),
+    "findings repair and recheck": (
+        "finding",
+        "hit",
+        "residue",
+        "removed",
+        "rewritten",
+        "repaired",
+        "rerun",
+        "recheck",
+        "clean",
+        "pass",
+    ),
+}
+
+MIN_STUDENT_FACING_RESIDUE_MARKER_GROUPS = 5
 
 
 def parse_sections(text: str) -> dict[str, str]:
@@ -383,6 +477,15 @@ def main() -> None:
             "indicates pending, failed, or unresolved presentation source/PPTPRO-quality cleanup."
         ),
     )
+    parser.add_argument(
+        "--require-student-facing-residue-audit",
+        action="store_true",
+        help=(
+            "Require a substantive 'Student-Facing Residue Audit' section covering visible "
+            "artifact text, internal workflow/tool/process language, AI/prompt traces, prior-task "
+            "residue, file paths, and repair/recheck evidence."
+        ),
+    )
     args = parser.parse_args()
 
     path = Path(args.final_audit).expanduser().resolve()
@@ -431,6 +534,12 @@ def main() -> None:
     ):
         raise SystemExit(
             "Final audit is incomplete. Missing required section: Presentation Source Audit"
+        )
+    if args.require_student_facing_residue_audit and is_blankish(
+        sections.get("Student-Facing Residue Audit", "")
+    ):
+        raise SystemExit(
+            "Final audit is incomplete. Missing required section: Student-Facing Residue Audit"
         )
 
     decision = normalize(sections["Completion Decision"])
@@ -558,6 +667,16 @@ def main() -> None:
                 raise SystemExit(
                     "Final audit cannot be ready while Presentation Source Audit still indicates failure or pending work."
                 )
+            if any(phrase in presentation_source_audit for phrase in WEAK_PRESENTATION_VISUAL_ASSERTIONS):
+                if not (
+                    "candidate" in presentation_source_audit
+                    and any(marker in presentation_source_audit for marker in ("selected", "rejected", "included", "excluded"))
+                    and any(marker in presentation_source_audit for marker in ("provenance", "traceable", "url", "file path"))
+                ):
+                    raise SystemExit(
+                        "Presentation Source Audit uses a weak no-visual assertion without candidate visual inventory, "
+                        "selection/rejection rationale, and provenance evidence."
+                    )
             missing_markers = missing_presentation_audit_markers(presentation_source_audit)
             marker_count = len(PRESENTATION_AUDIT_MARKER_GROUPS) - len(missing_markers)
             if marker_count < MIN_PRESENTATION_AUDIT_MARKER_GROUPS:
@@ -566,6 +685,29 @@ def main() -> None:
                     f"Covered {marker_count}/{len(PRESENTATION_AUDIT_MARKER_GROUPS)} marker groups; "
                     "missing: " + ", ".join(missing_markers)
                 )
+            enforce_named_marker_groups(
+                "Presentation Source Audit",
+                presentation_source_audit,
+                PRESENTATION_AUDIT_MARKER_GROUPS,
+                REQUIRED_PRESENTATION_AUDIT_MARKER_GROUPS,
+            )
+
+        if args.require_student_facing_residue_audit:
+            student_facing_residue_audit = normalize(
+                sections.get("Student-Facing Residue Audit", "")
+            )
+            if has_failure_signal(student_facing_residue_audit) or has_not_assessable_signal(
+                student_facing_residue_audit
+            ):
+                raise SystemExit(
+                    "Final audit cannot be ready while Student-Facing Residue Audit still indicates failed, unresolved, or not-assessable residue checks."
+                )
+            enforce_marker_coverage(
+                "Student-Facing Residue Audit",
+                student_facing_residue_audit,
+                STUDENT_FACING_RESIDUE_MARKER_GROUPS,
+                MIN_STUDENT_FACING_RESIDUE_MARKER_GROUPS,
+            )
 
         blocking_issues = normalize(sections.get("Blocking Issues", ""))
         if blocking_issues and blocking_issues not in BLANKISH_VALUES:

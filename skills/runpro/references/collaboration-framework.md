@@ -161,7 +161,7 @@ Optimized assistant sequence:
 
 After requirements, goals, deliverables, route, required structure, template bindings, and must-not-do items are reconstructed, pause and ask the user to confirm that requirement lock.
 
-Write this user-facing confirmation request in the user's working language by default. If that is unclear, use concise English. The message should summarize the project goal, final deliverable, locked requirements, execution plan, blockers or open questions, and end with a direct request for confirmation or correction. Internal state files may remain in the existing working language.
+Write this user-facing confirmation request in Chinese by default. The message should summarize the project goal, final deliverable, locked requirements, execution plan, blockers or open questions, and end with a direct request for confirmation or correction. Internal state files may remain in the existing working language, but the review-and-confirm response shown to the user should not be English unless the user explicitly requests English.
 
 Do not continue into execution until the user confirms or corrects it.
 

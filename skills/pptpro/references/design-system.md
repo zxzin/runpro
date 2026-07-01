@@ -39,6 +39,9 @@ PPTPRO decks include a cover and closing slide by default.
 Cover slide:
 
 - Keep it minimal: title, presentation date, presenter.
+- Minimal means no content extras; it does not mean a tiny title on a mostly empty canvas.
+- Use typography scale, balanced placement, logo/brand mark, restrained accent, or one relevant source/context image to create visual mass.
+- If using a cover image, it must be relevant, high-quality, traceable, and subordinate to the metadata; record provenance outside the audience-facing cover.
 - The date is the talk/report date. Do not use presentation duration, speaking length, or time limit as the date field.
 - Add course, module, institution, or group only when the user provides it or the assignment expects it.
 - Do not add thesis statements, agenda blocks, abstract text, decorative summaries, or case cards to the cover.
@@ -89,6 +92,7 @@ Use these density rules before final rendering:
 - The main content should occupy the middle and lower-middle canvas with clear visual weight.
 - The lower 20-25% should contain a synthesis bar, takeaway, visual continuation, or intentional footer space.
 - Avoid leaving the lower half blank unless the slide is a deliberate title/section divider.
+- On cover slides, title/date/presenter should create a complete composition; if large blank zones remain, add a traceable visual anchor or redesign the placement before handoff.
 - Avoid a large empty gulf between the main content row and the bottom synthesis/takeaway bar.
 - If a bottom takeaway is used, connect the visual rhythm to it by lowering the main content, adding an intermediate evidence strip, or moving the takeaway upward.
 - A visible card should have roughly 20-35% internal whitespace. If the whitespace is much larger, shrink the card or add structured content.
@@ -222,6 +226,7 @@ After preview rendering, inspect every slide and answer:
 - Does any label, card, or title feel cramped?
 - Does any card or panel feel too empty for its size?
 - Is the meaningful content distributed beyond the title area?
+- If this is the cover, does it feel like a complete designed opening slide rather than metadata stranded on blank space?
 - Do pill labels and short tags fit on one line?
 - Are connectors meaningful rather than decorative?
 - Does the background avoid beige/cream AI-template styling?

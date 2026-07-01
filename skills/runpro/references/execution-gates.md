@@ -90,6 +90,7 @@ Required:
 - detailed completion audit completed
 - requirement-ledger validation passes
 - final-audit validation passes
+- student-facing residue audit validation passes for every submitted, presented, exported, or handed-off artifact
 - for academic or source-backed graded written submissions, academic-quality audit validation passes
 - for visually polished PPT/PPTX work, PPTPRO-level checks pass: recipe map, visual enrichment/image plan, generated-image handling, rounded-corner consistency, human-facing source text, rendered preview inspection, and strict audit or documented limitation
 - in `strict mode`, the requirement-lock validation chain and final validators all passed in order
@@ -100,6 +101,7 @@ Required:
 - outputs organized for handoff
 - final summary written
 - no known fixable blocker remains
+- no visible internal workflow, assistant/tool, prompt, AI-similarity, prior-assignment, file-path, helper-filename, or audit-language residue remains in the final artifact
 - status is one of:
   - `Ready to submit`
   - `Ready for review`

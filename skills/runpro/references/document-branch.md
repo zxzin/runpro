@@ -188,6 +188,7 @@ Academic standards are part of drafting, not only final cleanup. Paragraphs shou
 - a final whole-document format pass was run after content completion
 - rubric-compliance, academic-standards, and source-claim audits were completed when relevant
 - a final citation micro-audit was run after the document already appeared handoff-ready
+- the actual final document file was scanned for student-facing residue after the last text replacement/export/template assembly step, including internal workflow notes, assistant/tool/prompt traces, AI-similarity wording, prior-assignment residue, file paths, helper filenames, and audit vocabulary
 - any late exporter or formatting fix was followed by another page-structure check for title page, executive summary, table placement, and page-count-sensitive sections
 - the document reads as a final artifact, not as working notes
 - any factual or literature-backed claims are traceable to real sources
@@ -219,3 +220,4 @@ Academic standards are part of drafting, not only final cleanup. Paragraphs shou
 - citation-format mismatch -> fix the style in both the body and reference list before declaring completion
 - weak no-author or local-material citation -> replace filename-like shorthand with the style-correct title-based or equivalent fallback, then recheck the reference list
 - author-name simplification -> restore the source-accurate spelling, initials, and diacritics, then rerun the citation micro-audit
+- student-facing residue found in the final DOCX/PDF -> rewrite or remove the internal/process sentence in the actual delivery file, re-export if needed, rerun `scripts/scan_student_facing_residue.py`, and update `Student-Facing Residue Audit` before handoff

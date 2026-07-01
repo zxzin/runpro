@@ -56,8 +56,8 @@ When `$pptpro` is used, do not treat it as a loose style hint. Treat it as a str
 
 Load the PPTPRO skill body and, for designed PPT/PPTX work, also load:
 
-- `$CODEX_HOME/skills/pptpro/references/design-system.md`
-- `$CODEX_HOME/skills/pptpro/references/slide-recipes.md`
+- `/Users/zin/.codex/skills/pptpro/references/design-system.md`
+- `/Users/zin/.codex/skills/pptpro/references/slide-recipes.md`
 
 PPTPRO is the source of truth for visually polished PPT/PPTX production quality. Runpro presentation routing, planning, final-audit records, and handoff checks must not apply a weaker local PPT standard than the loaded PPTPRO skill.
 
@@ -65,10 +65,12 @@ Carry these defaults into the requirement lock unless the assignment or user say
 
 - use clean white or light-gray backgrounds instead of beige/cream AI-looking templates
 - use sans-serif fonts only unless a template requires another font
-- include a simple cover slide by default, containing only title, presentation date, and presenter unless the user/template requires more; the date is the talk/report date, not presentation duration
+- include a simple cover slide by default, content-wise containing only title, presentation date, and presenter unless the user/template requires more; the date is the talk/report date, not presentation duration; simple does not mean visually sparse, so require balanced cover density through typography, positioning, restrained accent, logo/brand mark, or one relevant traceable image when allowed
 - include a simple final slide containing only `Thank You` plus `Questions` or `Questions & Discussion` by default unless explicitly forbidden
 - prefer concept maps, process flows, case cards, and media-analysis layouts over generic bullet slides
 - avoid repeated same-structure content slides; do not let multiple middle slides look like title + three text cards + bottom takeaway with only the words changed
+- for source-backed decks, create and maintain `runpro_workspace/10_analysis/source-visual-inventory.md` before slide drafting; do not treat image/source-structure search as optional polish
+- validate the source visual inventory with `scripts/validate_source_visual_inventory.py`; if no visual is selected, use `--allow-zero-selected-with-rationale` only when a strong `Zero-Image Rationale` records what was searched, why candidate visuals were rejected, and what diagram/matrix/source-structure substitute carries the visual role
 - for book, article, report, or source-led decks, include real source object/context when available: book cover, official metadata, table of contents, chapter/case structure, field sites, methods, evidence types, source screenshots, or original figures
 - for book-based decks, make at least one content slide show the source as an object or structure before reducing it to abstract concepts
 - after preserving source-native visuals, create a visual enrichment plan for text-heavy decks and find or create visuals that improve display power: official/context photos, maps, policy or media screenshots, event images, organization/place/object photos, lab/product/process photos, generated illustrations, diagrams, or other visual anchors
@@ -90,6 +92,7 @@ Carry these defaults into the requirement lock unless the assignment or user say
 - keep speaker scripts explicitly mapped to slide numbers
 - distinguish assignment-required formal references from practical `Sources used` traceability
 - when converting from a report, essay, final paper, thesis, or manuscript, inventory and reuse relevant original data figures/images from the source document instead of replacing them with generic visuals or text-only summaries
+- treat a zero-picture final PPTX as a special case, not the default; it needs a validated source-visual inventory and an explicit non-picture visual substitute such as a matrix, source-structure diagram, map-like schematic, or evidence-flow visual
 - render or preview every slide when tooling permits, inspect visually, repair defects, and rerun checks
 
 For template-bound or partial-scope PPT/PPTX work, also lock:
@@ -124,7 +127,7 @@ Use this PPTPRO production chain:
 For local PPTX handoffs using `$pptpro`, run its audit script with strict mode when available:
 
 ```bash
-python $CODEX_HOME/skills/pptpro/scripts/pptpro_audit.py path/to/deck.pptx --script path/to/script.docx --render --strict
+python /Users/zin/.codex/skills/pptpro/scripts/pptpro_audit.py path/to/deck.pptx --script path/to/script.docx --render --strict
 ```
 
 If the deck has no script, omit `--script` but still use `--render --strict`.
@@ -134,7 +137,7 @@ If the deck is converted from a report/essay/final paper/thesis/manuscript and a
 Treat any PPTPRO strict failure as a remediation trigger:
 
 ```bash
-python $CODEX_HOME/skills/pptpro/scripts/pptpro_audit.py path/to/deck.pptx --script path/to/script.docx --render --strict
+python /Users/zin/.codex/skills/pptpro/scripts/pptpro_audit.py path/to/deck.pptx --script path/to/script.docx --render --strict
 ```
 
 Manual visual inspection remains required because the audit script cannot know whether a slide is attractive. Reject and rebuild if any preview shows:
@@ -147,6 +150,7 @@ Manual visual inspection remains required because the audit script cannot know w
 - missing simple cover slide or missing final `Thank You` + `Questions` / `Questions & Discussion` slide when not explicitly forbidden
 - final slide with presenter/contact/course lines, closing phrases, Q&A copy, or any text beyond `Thank You` and `Questions` / `Questions & Discussion`
 - overloaded cover slide with abstract, agenda, thesis preview, or content cards
+- metadata-only cover slide that is visually empty, with a small title/date/presenter cluster stranded and most of the canvas unused
 - consecutive content slides that share the same card-row structure and differ only in text
 - scientific paper decks that merely mirror the source paper section order without a visible presentation argument arc
 - scientific result slides titled only `Results`, `Method`, `Figure X`, or other topic labels when a conclusion-style title is available
@@ -235,9 +239,10 @@ If a preserved range belongs to another teammate or is outside the user's sectio
 - aesthetic constraints from the user are explicitly checked, such as no serif font, no beige background, no AI-looking template, and no unexplained decorative marks
 - visually polished decks are checked for fit, density, rhythm, and balance: simple cover exists with presentation date rather than duration, final slide contains only `Thank You` plus `Questions` or `Questions & Discussion`, no card-border overflow, no giant sparse cards, no tiny-looking text inside large boxes, no wrapped short labels, no cramped title spacing, no large vertical gaps, and no bottom-empty slide layouts
 - visually polished source-backed decks are checked for source-object specificity: repeated card layouts are avoided, real source visuals/structures are used when available, book/report decks show the source as an object or structure, and media slides read as case analysis rather than ordinary text cards
-- visually polished decks are checked for appropriate image enrichment: text-heavy decks have a visual enrichment plan, relevant supporting images and appropriate generated content visuals were considered, any image used has clear provenance and a real content role, and no image harms readability, balance, or source integrity
+- visually polished decks are checked for appropriate image enrichment: text-heavy decks have a validated source-visual inventory, relevant supporting images and appropriate generated content visuals were considered, selected/rejected candidates have reasons, any image used has clear provenance and a real content role, and no image harms readability, balance, or source integrity
 - visually polished decks are checked for rounded-corner consistency: new cards, panels, callouts, and synthesis bars use softer rounded rectangles unless the supplied template requires square corners
 - visually polished decks are checked for human-facing delivery language: no visible slide text, footer, speaker note intended for delivery, or script line contains source-log, audit, provenance-record, or file-tracking explanations
+- the final PPTX and any delivery script are scanned after the last export/assembly step for student-facing residue, including assistant/tool/prompt traces, AI-similarity wording, prior-assignment residue, helper filenames, file paths, and hidden notes-page process text
 - template-bound decks are checked for fit to the supplied template's palette, typography, spacing, and page rhythm rather than being redesigned into an unrelated house style
 - partial-scope decks are checked for final slide count, slide order, revised range, and preserved range
 - slide/script correspondence is checked when a speaker script is part of the deliverable
@@ -258,11 +263,13 @@ If a preserved range belongs to another teammate or is outside the user's sectio
 - missing presenter context -> add notes or a delivery summary if needed
 - citation or reference mismatch -> fix slide-level references and end references before signoff
 - source-log/deck drift -> rebuild the end references or sources slide from the verified `source-log.md`, then rerun the source audit
+- missing source visual inventory -> stop deck polishing, create `source-visual-inventory.md`, record candidate visuals and selected/rejected reasons, run `validate_source_visual_inventory.py`, then rebuild or revise the deck
 - mixed reference/source slide -> split into `References` and `Data/Media Sources` or equivalent labeled sections unless the assignment explicitly requires a combined list
 - internal workflow sentence appears in deck -> remove it from the PPT, keep the detail only in working logs/audits, and replace visible text with a concise source credit or normal `Sources used` entry if needed
+- student-facing residue appears in slides, notes, or script -> remove or rewrite it in the actual deliverable, rerun `scripts/scan_student_facing_residue.py` on the PPTX/script where supported, and update `Student-Facing Residue Audit` before handoff
 - repetitive text-card deck -> redesign at least one middle slide as a source/object page, process flow, field-site/case comparison, source-figure slide, media case page, timeline, or matrix
 - book/source deck feels generic -> add cover/official metadata, table/chapter/case structure, field sites, methods, key actors, evidence types, or other verified source-specific material
-- source-backed deck still feels too text-only -> add relevant supporting images, generated illustrations, diagrams, source-object pages, or image-led layouts only if they strengthen the content, then rebalance text around them
+- source-backed deck still feels too text-only -> add relevant supporting images, generated illustrations, diagrams, source-object pages, or image-led layouts only after updating and validating the source visual inventory, then rebalance text around them
 - no suitable real/supporting image exists but a visual would improve clarity -> generate a custom content visual with the current latest built-in Codex/ChatGPT image tool, log it as generated, and keep it clearly non-evidentiary
 - weak image use -> remove generic/decorative images, replace with a source-native visual or a traceable contextual image, or return to a diagram if no good image exists
 - sharp default boxes -> switch new PPTPRO cards/callouts/panels to medium-soft rounded rectangles and rerender

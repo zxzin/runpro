@@ -65,6 +65,7 @@ PLAYBOOKS = {
         "immediate_actions": [
             "Determine whether the target output is PPTX, Google Slides, or Canva.",
             "If the deck must be beautiful, class-ready, or non-generic, load $pptpro and choose slide recipes before building.",
+            "For source-backed decks, create and validate source-visual-inventory.md before final slide drafting.",
             "Build the slide sequence and scaffold the key slides first.",
             "Render previews, repair visual defects, and rerun checks before handoff.",
         ],
@@ -73,6 +74,7 @@ PLAYBOOKS = {
             "Slide requirement coverage",
             "Editable output format",
             "PPTPRO recipe-driven visual quality when applicable",
+            "Source visual inventory and provenance for source-backed decks",
             "Preview-checked layout readability",
         ],
         "recommended_skills": [
@@ -85,6 +87,7 @@ PLAYBOOKS = {
             "The deck sequence is coherent",
             "Key slide content is complete",
             "Visual breakages and overflow are addressed through rendered preview checks",
+            "Source-backed decks have validated visual candidates, provenance, and selected/rejected rationale",
             "PPTPRO strict audit passes when $pptpro was used",
         ],
         "reference_file": "references/presentation-branch.md",

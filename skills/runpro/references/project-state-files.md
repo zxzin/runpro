@@ -263,6 +263,8 @@ Suggested structure:
 - [ ] Important revisions applied
 - [ ] Validation completed
 - [ ] Final whole-document format check passed
+- [ ] Source visual inventory validated when applicable
+- [ ] Student-facing residue audit passed on final visible artifact text
 - [ ] Default report-table and process-diagram style rules were applied or explicitly overridden
 - [ ] All required assignment parts completed
 - [ ] Target score band is plausibly reachable or true blocker documented
@@ -290,6 +292,7 @@ Suggested structure:
 ## Estimated Score Band
 ## Strict-Mode Validation Chain
 ## Final Format Check
+## Student-Facing Residue Audit
 ## Rubric Compliance Audit
 ## Academic Standards Audit
 ## Source-Claim Integrity Audit
@@ -314,12 +317,13 @@ Rule:
 - the `Estimated Score Band` should record the most conservative credible current band rather than the most optimistic scenario
 - for `strict mode` projects, the audit should record whether the validator-backed chain was completed cleanly
 - when the assignment specifies formatting rules, the audit should record the final whole-document format-check result explicitly
+- the audit should record a student-facing residue audit on the actual final artifact, including visible text surfaces checked, internal workflow/tool/process language, AI/prompt traces, prior-assignment residue, file paths, findings, repairs, and recheck result
 - for graded academic written submissions, the audit should record criterion-by-criterion rubric compliance, including pass/partial/fail/not-assessable status and evidence for central criteria
 - for assignment-style document work, the audit should record academic standards compliance, including citation style, in-text/reference matching, reference metadata, formatting, figure/table visual quality, visual balance, label readability, paragraph logic, headings, word count, appendices, and academic register where relevant
 - for source-backed written submissions, the audit should record source-claim integrity for major factual, empirical, evaluative, and comparative claims
 - for academic or source-backed graded written submissions, the audit should record prompt/rubric alignment, section-level analytical purpose, evidence quality, comparative synthesis, limitations or counterarguments, visual/table integration, citation-to-outcome specificity, empirical precision, theory/framework application, conclusion discipline, and citation support integrity when those checks are relevant
 - for assignment-style document work, the audit should record the final citation micro-audit result explicitly, including any repaired non-blocking defects
-- for source-backed presentation work, the audit should record the final presentation source audit result explicitly, including whether the deck references/source slides match the verified `source-log.md`
+- for source-backed presentation work, the audit should record the final presentation source audit result explicitly, including whether the deck references/source slides match the verified `source-log.md`, whether `source-visual-inventory.md` was validated, which candidate visuals were selected/rejected, what provenance supports them, and any zero-image rationale
 - for visually polished PPT/PPTX work using `$pptpro`, the audit should record PPTPRO-level production evidence: slide recipe map, visual enrichment/image plan, generated-image handling with the current latest built-in Codex/ChatGPT image tool where used, rounded-corner consistency, human-facing source text with no internal workflow language, original data/source figure preservation, rendered preview inspection, strict audit result, and any revised-range/full-deck assembly distinction
 - if any fixable item is fail or incomplete, do not hand off yet
 - if the submission is still below the `90+` target band, record why and what repairs are still required
@@ -404,7 +408,42 @@ Rule:
 - prefer recent literature from roughly the last five years unless an older source is clearly necessary
 - when keeping an older source, note in `Notes` why it remains important
 
-## 8A. `runpro_workspace/10_analysis/source-claim-audit.md`
+## 8A. `runpro_workspace/10_analysis/source-visual-inventory.md`
+
+Purpose:
+
+- force source-backed presentations to inspect real source visuals before slide drafting
+- record candidate images, source structures, generated visuals, and diagram substitutes
+- prevent text-only decks from passing by merely claiming that visuals were unnecessary
+
+Suggested structure:
+
+```text
+# Source Visual Inventory
+
+## Visual Candidate V1
+### Source Or Search Path
+### Visual Type
+### URL Or File Path
+### Evidence Role
+### Status
+### Inclusion Or Exclusion Reason
+### Provenance Notes
+
+## Zero-Image Rationale
+```
+
+Create this file before drafting source-backed or visually polished presentation slides.
+
+Rule:
+
+- include at least two usable candidate visuals or source-structure substitutes for source-backed decks
+- mark each candidate as selected/used/included or rejected/excluded/not used
+- provide a reason and traceability for every candidate
+- validate with `scripts/validate_source_visual_inventory.py`
+- use `--allow-zero-selected-with-rationale` only when the zero-image rationale states what was searched, why candidates were rejected, and what diagram, matrix, or source-structure visual system replaces images
+
+## 8B. `runpro_workspace/10_analysis/source-claim-audit.md`
 
 Purpose:
 

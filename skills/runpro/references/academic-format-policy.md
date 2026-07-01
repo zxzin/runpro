@@ -7,13 +7,54 @@ Use this policy for essays, papers, literature reviews, source-backed reports, a
 For academic or source-backed tasks:
 
 1. identify the assignment requirement
-2. identify the required citation style
-3. gather sufficient real sources
-4. log them in `runpro_workspace/10_analysis/source-log.md`
-5. verify the source base
-6. only then begin writing or slide synthesis
+2. identify the exact local academic rules from the assignment, course, institution, tutor feedback, template, handbook, rubric, and style guide
+3. identify the required citation style
+4. gather sufficient real sources
+5. log them in `runpro_workspace/10_analysis/source-log.md`
+6. verify the source base
+7. only then begin writing or slide synthesis
 
 Do not write a literature-backed artifact first and search for sources later.
+
+## Coursework Topic Differentiation Rule
+
+For graded coursework where the student may choose a topic, the best topic is not always the most obvious evidence-rich topic.
+
+Before locking a topic:
+
+- identify assignment examples, class case studies, teacher-worked examples, prior submitted work, and user warnings about classmate overlap
+- identify generic default topics that a broad AI answer would likely suggest from the same materials
+- reject or downgrade topics with high collision risk unless the assignment specifically requires them or the user explicitly chooses them
+- prefer a narrower and more distinctive topic that still has enough high-quality English evidence, local policy relevance, and scope for critical analysis
+- record the topic-selection rationale, rejected default topics, and collision-risk judgement in `requirement-ledger.md`, `project-brief.md`, or `approval-gate.md`
+
+Do not choose a distinctive topic if it would make the assignment unsupportable, uncited, too narrow to meet the learning outcomes, or dependent on unverifiable claims.
+
+## Local Academic Rules Rule
+
+For academic work, local course and institution rules are not cosmetic. They define the submission target.
+
+Before drafting, identify and record the exact local rules when available from:
+
+- assessment briefs and marking rubrics
+- course/module handbooks
+- lecture slides or assessment-support slides
+- tutor feedback and cohort feedback
+- referencing guides and library guides
+- formatting templates, examples, shells, or previous marked samples
+- word-count policies and assessment-content-limit policies
+- academic-integrity, AI-use, plagiarism, and declaration instructions
+- submission portal screenshots, file-naming rules, and required export formats
+
+Do not replace these with generic academic conventions. For example:
+
+- `critical writing` means what the rubric, tutor, and course examples require, not a generic list of critique phrases
+- `reflective writing` means the required local reflective model or voice rule if one is specified
+- `word count` means the local include/exclude policy, not a generic assumption that references, tables, captions, or case studies are excluded
+- `Harvard` means the institutional Harvard variant if a local guide is provided
+- `report`, `essay`, `portfolio`, `poster`, or `presentation` means the local structure and submission expectations, not a generic artifact type
+
+If multiple local sources conflict, prioritize the latest assignment-specific source, then tutor feedback, then course/module handbook, then institutional guide, then generic convention. Record any unresolved conflict before execution.
 
 ## Literature Selection Rule
 
@@ -43,6 +84,18 @@ Examples:
 
 If the style requirement is missing, mark it as unresolved and avoid inventing a style requirement.
 
+When the assignment names a broad family such as `Harvard`, `APA`, `MLA`, `Chicago`, or `Vancouver`, do not assume the generic version is enough. Many institutions use local variants.
+
+Before drafting any graded academic or source-backed written deliverable:
+
+- search the project folder and requirement materials for a referencing guide, library guide, citation-style PDF, assessment appendix, handbook note, exemplar reference list, or style screenshot
+- if a local guide exists, treat it as the citation authority over memory or generic examples
+- extract the exact rules for the source types actually used, such as journal articles, online journal articles, guidelines, websites, reports, official publications, books, chapters, datasets, images, and classroom materials
+- record the guide filename/path and the checked examples in `requirement-ledger.md`, `rubric-ledger.md`, or `final-audit.md`
+- if the guide cannot be parsed, state the limitation and use the closest verified official institutional webpage or assignment brief wording; do not silently fall back to a generic style
+
+For example, `UWE Harvard`, `UWE Bristol Harvard`, `Cite Them Right Harvard`, and `generic Harvard` are not interchangeable unless the assignment explicitly says they are.
+
 ## Assignment-Format Rule
 
 If the assignment provides explicit formatting rules, treat them as binding from the start of drafting rather than as a cleanup step to defer until the end.
@@ -59,8 +112,12 @@ This includes items such as:
 - paragraph alignment
 - citation presentation
 - figure or table caption format
+- file type, export type, filename, submission package contents, and required/forbidden visible metadata
+- word-count declaration wording and local include/exclude rules
 
 Lock these requirements in the requirement lock before full drafting begins whenever they are available.
+
+Do not treat a document as final merely because the prose is complete. The final artifact must match the local format and submission mechanics in the actual delivery file.
 
 ## Rubric-First Writing Rule
 
@@ -109,14 +166,20 @@ Academic conventions are binding quality gates, not cosmetic polish.
 
 Check these during drafting and again in the final file when relevant:
 
+- exact local academic rules were identified and used, including assignment-specific, course-specific, institution-specific, tutor-feedback, template, and submission-portal rules
 - citation style is identified from the assignment rather than guessed
+- if a local or institutional referencing guide is available, the exact guide was inspected and used as the source of truth rather than relying on a generic style family
 - in-text citations and reference-list entries match each other
 - reference-list ordering, punctuation, capitalization, italics, hanging indents, numbering, or superscripts match the required style when assessable
+- reference-list format is checked against the exact local examples for the source types used, including article-title quotation rules, punctuation between title/journal/volume, volume and issue spacing, page prefix style, DOI treatment, URL phrase such as `Available from` versus `Available at`, access-date bracket or parenthesis format, and whether journal titles or article titles require italics
 - source author names, initials, years, titles, journal/proceedings/book details, DOI/URL, and access details are not simplified or invented
 - borrowed ideas, statistics, definitions, methods, frameworks, tables, figures, and distinctive claims are cited
 - paragraphs follow academic reasoning: claim, evidence, analysis, and implication
 - core terms, scope boundaries, comparison criteria, methodology, and framework choices are defined before evaluative claims use them
 - headings, captions, tables, figures, appendices, page layout, word count, and file format follow the brief or template
+- word-count statement and word-count calculation follow the local policy for included and excluded content
+- required title, question, case study, topic choice, module code, cover page, declaration, or feedback-question fields follow the local instruction rather than an invented convention
+- submission mechanics such as filename, export format, separate appendices, reference list placement, and package contents match the local requirement when assessable
 - figures and tables are referred to in the text, captioned correctly, interpreted in prose, and visually balanced enough to look academic at final document size
 - language is formal, precise, and field-appropriate without generic filler or unsupported exaggeration
 
@@ -267,10 +330,13 @@ Raise the ratio when the task is highly current or fast-moving. Relax it only wh
 
 For essay or paper deliverables, the final delivery-format check should include:
 
+- the exact local rules used for the final check are named in the audit, not only summarized as "brief checked"
 - assignment-specific formatting requirements were applied during drafting rather than retrofitted only at the end
 - in-text citations match the required style
 - reference list matches the required style
 - document genre, register, and depth still match the approved report type
+- title, question wording, case-study inclusion/exclusion, word-count declaration, and required/forbidden headings match the assignment source
+- the local word-count policy was applied to the final file, including tables, captions, figures, appendices, title, citations, case study, and references when the policy says they count
 - superscripts or numbered citations are correct when required
 - document text color is consistently black unless the assignment explicitly says otherwise
 - if no font or layout rule was provided, the document follows the default academic fallback format consistently
@@ -349,6 +415,8 @@ This micro-audit should explicitly check:
 
 - in-text citations and the reference list are mutually consistent
 - the reference list is sorted correctly for the required style
+- the exact institutional or local referencing guide, if present, was used for final checks rather than a generic style-memory approximation
+- article titles, book/report titles, journal titles, quotation marks, italics, commas/full stops, volume/issue spacing, page ranges, article numbers, DOI punctuation, `Available from/at` wording, and access-date wrappers match the local guide examples for each source type used
 - author names, initials, and diacritics match the real source metadata rather than a simplified rewrite
 - no-author, unpublished, classroom, or local materials are cited using the style-correct title-based or equivalent fallback rather than a filename-like shortcut
 - no filename, folder name, or ad hoc label is masquerading as a proper source title in the citation system
@@ -356,6 +424,26 @@ This micro-audit should explicitly check:
 Treat this as a mandatory final-quality pass for graded written work because these defects are often non-blocking but still grade-relevant.
 
 If any micro-defect is found, fix it, recheck it, and only then hand off the document.
+
+Do not sign off a graded written document as `Ready to submit` when the reference list has only been checked for source quality, recency, or count. Source quality and reference formatting are separate checks.
+
+## Local Rule Micro-Audit Rule
+
+For graded academic documents, run a local-rule micro-audit after the document appears complete and before handoff.
+
+This is broader than citation checking. It should explicitly check, when assessable:
+
+- final title, question, selected topic, case study, or scenario matches the assignment source
+- all learning outcomes, required questions, required sub-parts, and tutor-feedback points are visibly addressed
+- local critical-writing, reflective-writing, PEEL, model-use, or structure expectations are followed
+- word count is calculated according to the local policy and the declaration wording is accurate
+- required included/excluded material, such as case study text, appendices, references, feedback questions, cover sheets, or declarations, matches the assignment
+- formatting, font, spacing, margins, page layout, heading use, and body bold/italic conventions follow the template or local rule
+- submission mechanics match local instructions: final file type, filename, separate files, package contents, visible metadata, and whether drafts/notes should be removed
+- academic-integrity or AI-use instructions are not contradicted by visible text in the final artifact
+- reference and citation formatting has already passed the separate citation micro-audit
+
+Do not hand off as `Ready to submit` if this audit is missing for a graded written submission with local requirements available. If the local rule source cannot be read, record the limitation and mark readiness accordingly.
 
 ## Presentation Formatting Rule
 

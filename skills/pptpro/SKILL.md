@@ -11,6 +11,8 @@ Use PPTPRO to make PPTs that look intentionally designed, not like text dropped 
 
 Default deck shell: include a simple designed cover slide at the beginning and a simple closing slide at the end. The cover should only contain basic metadata: title, presentation date, and presenter. The date is the actual talk/report date, not the presentation duration. The closing slide should contain `Thank You` and either `Questions` or `Questions & Discussion`; default to `Questions & Discussion` for class/academic presentations. Do not add abstracts, argument previews, slogans, agendas, decorative summaries, contact lines, or extra content unless the user or an official template explicitly requires them.
 
+Simple cover means metadata-only, not visually empty. A cover must still feel designed and balanced: use strong title placement, module/date/presenter grouping, restrained accent structure, a logo/brand mark, or one relevant high-quality traceable image/source object when allowed. Do not fill cover emptiness with agenda, thesis preview, abstract text, slogans, decorative summaries, or content cards.
+
 Template-bound exception: when the user provides an existing deck/template and asks to modify it, follow the supplied deck structure over the default shell. Preserve required cover, conclusion, footer, section, and teammate pages unless the user explicitly asks to replace them. If the user says to edit only a section, keep the final deliverable as the full deck with the unedited sections intact by default.
 
 ## Core Style
@@ -35,6 +37,7 @@ Default to this style unless the user gives another brand/template:
 - When text is near a card boundary, fix the layout first: shorten the copy, enlarge the card, increase padding, split content, or lower the font size within the allowed range.
 - Keep slide weight balanced across the useful canvas. Do not put all meaningful content in the upper third while the lower half is empty.
 - Balance vertical rhythm: title, subtitle, main content, synthesis, and footer must feel evenly distributed rather than stacked at the top with a large blank middle.
+- Check cover density separately: reject covers where a small title block is stranded in the upper-left or upper-middle with most of the canvas inert blank space. Fill the cover through layout, scale, logo/brand mark, traceable image, or purposeful accent while keeping cover text metadata-only.
 - Multi-line titles must have readable line spacing, and subtitles must not sit too close to the title.
 - Every pill/tag/legend label must fit on one line. If a short label wraps, widen it, shorten it, or switch to a different layout.
 - For book, article, report, or source-led presentations, create a sense of the source as an object before abstracting the argument. Use available real source visuals such as a book cover, article page, official report cover, table of contents, chapter/case structure, method/site map, real data visual, or media screenshot when it is relevant and legally/provenance-safe.
@@ -118,6 +121,7 @@ Also revise and rerender if a preview shows:
 - any card where text crosses, touches, or appears clipped by the card border
 - any text box whose visible copy needs more height or width than the box provides
 - a page that feels top-heavy, left-heavy, or bottom-empty
+- a cover slide that is metadata-only but visually sparse, with a small title/date/presenter cluster and a large unused blank field
 - a large empty vertical gap between the main content row and the bottom takeaway
 - title lines or title/subtitle spacing that visually compress into one block
 - body text that looks small relative to its container
@@ -147,7 +151,7 @@ Also revise and rerender if a preview shows:
    - for existing decks/templates: total source slide count, revised slide range, preserved slide range, and whether final handoff is the full deck or an excerpt
 
 2. Build the narrative before styling:
-   - cover slide: presentation title, presentation date, presenter; keep it minimal and metadata-only; do not use presentation duration as the date field
+   - cover slide: presentation title, presentation date, presenter; keep text metadata-only but design the page as a full cover with balanced placement, scale, logo/brand mark, restrained accent, or one relevant traceable image when needed; do not use presentation duration as the date field
    - for template-bound decks, extract template visual rules and preserve locked/teammate slide ranges before redesigning the user's range
    - if converting from a report, essay, final paper, thesis, or manuscript, inventory the original data figures/images before drafting slides
    - for scientific paper, preprint, journal-club, thesis-seminar, or other figure-led academic decks, classify the source type and choose the narrative arc before assigning slide recipes
@@ -168,7 +172,7 @@ Also revise and rerender if a preview shows:
    - closing slide: only `Thank You` and `Questions & Discussion`; `Questions` alone is acceptable when a shorter ending fits better, unless the supplied template or partial-scope structure requires a different existing closing/conclusion slide
 
 3. Design the deck:
-   - make slide 1 a polished cover; make the first content slide a concept or thesis page, not a generic bullet page
+   - make slide 1 a polished cover with balanced visual mass; make the first content slide a concept or thesis page, not a generic bullet page
    - for book/source decks, make one early content slide a source/object page using real cover/metadata or source structure when available
    - make middle slides explain relationships through diagrams or flows
    - for scientific paper decks, use conclusion-style titles on most content slides rather than labels such as `Results`, `Method`, or `Figure 3`
@@ -226,6 +230,7 @@ Also revise and rerender if a preview shows:
 - No short pill/tag labels wrapping across lines.
 - No slide whose meaningful content is visually concentrated only in the upper portion.
 - Deck includes a cover slide with presentation date, not duration, and a final closing slide containing only `Thank You` plus `Questions` or `Questions & Discussion` unless explicitly forbidden.
+- Cover slide is not mostly blank: the metadata may be minimal, but title placement, scale, accent/image/logo use, and lower-canvas balance must create a complete cover composition.
 - For template-bound decks, existing required cover/conclusion/closing structure is preserved unless the user approved a replacement.
 - No unexplained lines, dashes, boxes, or decorative marks.
 - Slide text and script sections correspond.
@@ -254,7 +259,7 @@ Also revise and rerender if a preview shows:
 Run the audit script from any project folder:
 
 ```bash
-python $CODEX_HOME/skills/pptpro/scripts/pptpro_audit.py path/to/deck.pptx --script path/to/script.docx --render --strict
+python /Users/zin/.codex/skills/pptpro/scripts/pptpro_audit.py path/to/deck.pptx --script path/to/script.docx --render --strict
 ```
 
 After inventorying source-document data figures or deciding to use supporting images, add `--min-pictures N` when the final deck is expected to contain at least `N` original source or supporting image assets.
