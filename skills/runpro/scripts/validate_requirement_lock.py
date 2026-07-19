@@ -34,6 +34,103 @@ PLACEHOLDER_VALUES = {
     "to confirm",
 }
 
+VALIDATION_PROFILE_KEYS = {
+    "strict_mode",
+    "target_90_plus",
+    "rubric_compliance_audit",
+    "academic_standards_audit",
+    "source_claim_audit",
+    "academic_quality_audit",
+    "citation_micro_audit",
+    "local_rule_audit",
+    "presentation_source_audit",
+    "student_facing_residue_audit",
+    "source_log_validation",
+    "source_visual_inventory_validation",
+    "checkpro_required",
+    "pptpro_required",
+    "source_minimum",
+    "preferred_recent_years",
+    "min_recent_ratio",
+    "visual_minimum_candidates",
+    "allow_zero_selected_with_rationale",
+    "pptpro_deck",
+    "pptpro_script",
+    "pptpro_min_pictures",
+}
+
+BOOL_PROFILE_KEYS = {
+    key
+    for key in VALIDATION_PROFILE_KEYS
+    if key
+    not in {
+        "source_minimum",
+        "preferred_recent_years",
+        "min_recent_ratio",
+        "visual_minimum_candidates",
+        "pptpro_deck",
+        "pptpro_script",
+        "pptpro_min_pictures",
+    }
+}
+
+
+def parse_validation_profile(value: str) -> dict[str, str]:
+    profile: dict[str, str] = {}
+    for raw in value.splitlines():
+        line = raw.strip().lstrip("-*").strip()
+        if ":" not in line:
+            continue
+        key, raw_value = line.split(":", 1)
+        normalized_key = key.strip().lower().replace("-", "_").replace(" ", "_")
+        if normalized_key in VALIDATION_PROFILE_KEYS:
+            profile[normalized_key] = raw_value.strip()
+    return profile
+
+
+def validate_profile(profile: dict[str, str]) -> None:
+    missing = sorted(VALIDATION_PROFILE_KEYS - set(profile))
+    if missing:
+        raise SystemExit(
+            "Requirement lock validation profile is incomplete. Missing keys: "
+            + ", ".join(missing)
+        )
+
+    invalid_booleans = sorted(
+        key
+        for key in BOOL_PROFILE_KEYS
+        if profile[key].strip().lower() not in {"yes", "no"}
+    )
+    if invalid_booleans:
+        raise SystemExit(
+            "Requirement lock validation profile has unresolved yes/no values: "
+            + ", ".join(invalid_booleans)
+        )
+
+    for key in (
+        "source_minimum",
+        "preferred_recent_years",
+        "visual_minimum_candidates",
+        "pptpro_min_pictures",
+    ):
+        try:
+            value = int(profile[key])
+        except ValueError as exc:
+            raise SystemExit(f"Validation profile value {key} must be an integer.") from exc
+        if value < 0:
+            raise SystemExit(f"Validation profile value {key} cannot be negative.")
+
+    try:
+        recent_ratio = float(profile["min_recent_ratio"])
+    except ValueError as exc:
+        raise SystemExit("Validation profile value min_recent_ratio must be numeric.") from exc
+    if not 0 <= recent_ratio <= 1:
+        raise SystemExit("Validation profile min_recent_ratio must be between 0 and 1.")
+
+    for key in ("pptpro_deck", "pptpro_script"):
+        if not profile[key].strip():
+            raise SystemExit(f"Validation profile value {key} must be a path or 'none'.")
+
 
 def parse_sections(text: str) -> dict[str, str]:
     sections: dict[str, str] = {}
@@ -69,6 +166,11 @@ def main() -> None:
         "--require-approved",
         action="store_true",
         help="Require Approval Status and User Confirmation Record to show confirmed execution scope",
+    )
+    parser.add_argument(
+        "--require-validation-profile",
+        action="store_true",
+        help="Require a complete explicit validation profile with no pending values",
     )
     args = parser.parse_args()
 
@@ -111,6 +213,14 @@ def main() -> None:
             raise SystemExit(
                 "Requirement lock is not approved cleanly. User Confirmation Record is missing."
             )
+
+    if args.require_validation_profile:
+        profile_text = sections.get("Validation Profile", "")
+        if not is_meaningful(profile_text):
+            raise SystemExit(
+                "Requirement lock is incomplete. Validation Profile is missing or unresolved."
+            )
+        validate_profile(parse_validation_profile(profile_text))
 
     print("Requirement lock OK")
 
