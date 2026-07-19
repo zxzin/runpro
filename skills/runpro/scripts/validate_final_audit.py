@@ -221,6 +221,44 @@ STUDENT_FACING_RESIDUE_MARKER_GROUPS = {
 
 MIN_STUDENT_FACING_RESIDUE_MARKER_GROUPS = 5
 
+LOCAL_RULE_MARKER_GROUPS = {
+    "named local authority": (
+        "local source",
+        "local rule",
+        "assessment brief",
+        "rubric",
+        "course guide",
+        "institutional guide",
+        "template",
+    ),
+    "task and structure": ("task wording", "learning outcome", "structure", "section", "heading"),
+    "word count": ("word count", "word-count", "included words", "excluded words"),
+    "format and template": ("format", "template", "font", "spacing", "margin", "file type"),
+    "citation authority": ("citation", "referencing", "reference style", "style guide"),
+    "integrity and required content": (
+        "academic integrity",
+        "declaration",
+        "required content",
+        "forbidden content",
+    ),
+    "submission mechanics": ("filename", "submission", "package", "export", "portal"),
+    "final artifact evidence": ("final artifact", "actual file", "visible", "checked"),
+}
+
+MIN_LOCAL_RULE_MARKER_GROUPS = 6
+REQUIRED_LOCAL_RULE_MARKER_GROUPS = ("named local authority", "final artifact evidence")
+
+CHECKPRO_EVIDENCE_MARKER_GROUPS = {
+    "checkpro invocation": ("checkpro", "$checkpro", "equivalent academic-quality audit"),
+    "actual artifact": ("actual final artifact", "actual file", "native file", "final document"),
+    "rubric alignment": ("prompt", "rubric", "required question", "criterion"),
+    "quality dimensions": ("argument", "synthesis", "evidence quality", "limitation", "conclusion"),
+    "conservative score": ("lower credible", "conservative", "score risk", "estimated score band"),
+    "repair and recheck": ("repair", "revised", "remediation", "recheck", "rerun"),
+}
+
+MIN_CHECKPRO_EVIDENCE_MARKER_GROUPS = 5
+
 
 def parse_sections(text: str) -> dict[str, str]:
     sections: dict[str, str] = {}
@@ -486,6 +524,21 @@ def main() -> None:
             "residue, file paths, and repair/recheck evidence."
         ),
     )
+    parser.add_argument(
+        "--require-local-rule-audit",
+        action="store_true",
+        help=(
+            "Require a substantive 'Local Rule Compliance Audit' section that names the "
+            "controlling local sources and verifies the actual final artifact."
+        ),
+    )
+    parser.add_argument(
+        "--require-checkpro-evidence",
+        action="store_true",
+        help=(
+            "Require substantive CheckPro execution evidence for formal graded academic writing."
+        ),
+    )
     args = parser.parse_args()
 
     path = Path(args.final_audit).expanduser().resolve()
@@ -540,6 +593,18 @@ def main() -> None:
     ):
         raise SystemExit(
             "Final audit is incomplete. Missing required section: Student-Facing Residue Audit"
+        )
+    if args.require_local_rule_audit and is_blankish(
+        sections.get("Local Rule Compliance Audit", "")
+    ):
+        raise SystemExit(
+            "Final audit is incomplete. Missing required section: Local Rule Compliance Audit"
+        )
+    if args.require_checkpro_evidence and is_blankish(
+        sections.get("CheckPro Execution Evidence", "")
+    ):
+        raise SystemExit(
+            "Final audit is incomplete. Missing required section: CheckPro Execution Evidence"
         )
 
     decision = normalize(sections["Completion Decision"])
@@ -707,6 +772,38 @@ def main() -> None:
                 student_facing_residue_audit,
                 STUDENT_FACING_RESIDUE_MARKER_GROUPS,
                 MIN_STUDENT_FACING_RESIDUE_MARKER_GROUPS,
+            )
+
+        if args.require_local_rule_audit:
+            local_rule_audit = normalize(sections.get("Local Rule Compliance Audit", ""))
+            if has_failure_signal(local_rule_audit) or has_not_assessable_signal(local_rule_audit):
+                raise SystemExit(
+                    "Final audit cannot be ready while Local Rule Compliance Audit still indicates failed, unresolved, or not-assessable checks."
+                )
+            enforce_marker_coverage(
+                "Local Rule Compliance Audit",
+                local_rule_audit,
+                LOCAL_RULE_MARKER_GROUPS,
+                MIN_LOCAL_RULE_MARKER_GROUPS,
+            )
+            enforce_named_marker_groups(
+                "Local Rule Compliance Audit",
+                local_rule_audit,
+                LOCAL_RULE_MARKER_GROUPS,
+                REQUIRED_LOCAL_RULE_MARKER_GROUPS,
+            )
+
+        if args.require_checkpro_evidence:
+            checkpro_evidence = normalize(sections.get("CheckPro Execution Evidence", ""))
+            if has_failure_signal(checkpro_evidence) or has_not_assessable_signal(checkpro_evidence):
+                raise SystemExit(
+                    "Final audit cannot be ready while CheckPro Execution Evidence indicates failed, unresolved, or not-assessable checks."
+                )
+            enforce_marker_coverage(
+                "CheckPro Execution Evidence",
+                checkpro_evidence,
+                CHECKPRO_EVIDENCE_MARKER_GROUPS,
+                MIN_CHECKPRO_EVIDENCE_MARKER_GROUPS,
             )
 
         blocking_issues = normalize(sections.get("Blocking Issues", ""))

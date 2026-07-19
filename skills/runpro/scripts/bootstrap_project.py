@@ -198,6 +198,7 @@ pending
 - [ ] Important revisions applied
 - [ ] Validation completed
 - [ ] Final whole-document format check passed
+- [ ] Validation profile locked and contradiction check passed
 - [ ] Rubric compliance audit passed when applicable
 - [ ] Academic standards audit passed when applicable
 - [ ] Source-claim integrity audit passed when applicable
@@ -207,6 +208,7 @@ pending
 - [ ] All required assignment parts completed
 - [ ] Target score band is plausibly reachable or true blocker documented
 - [ ] Final audit passed
+- [ ] Current quality receipt generated after the last artifact change
 - [ ] Fixable failures remediated
 - [ ] Final summary written
 """,
@@ -226,6 +228,8 @@ pending
 
 ## Student-Facing Residue Audit
 
+## Local Rule Compliance Audit
+
 ## Rubric Compliance Audit
 
 ## Academic Standards Audit
@@ -233,6 +237,8 @@ pending
 ## Source-Claim Integrity Audit
 
 ## Academic Quality Audit
+
+## CheckPro Execution Evidence
 
 ## Citation Micro-Audit
 
@@ -356,6 +362,31 @@ pending
 
 ## Default Formatting Fallback
 
+## Validation Profile
+
+- strict_mode: pending
+- target_90_plus: pending
+- rubric_compliance_audit: pending
+- academic_standards_audit: pending
+- source_claim_audit: pending
+- academic_quality_audit: pending
+- citation_micro_audit: pending
+- local_rule_audit: pending
+- presentation_source_audit: pending
+- student_facing_residue_audit: pending
+- source_log_validation: pending
+- source_visual_inventory_validation: pending
+- checkpro_required: pending
+- pptpro_required: pending
+- source_minimum: 3
+- preferred_recent_years: 0
+- min_recent_ratio: 0
+- visual_minimum_candidates: 2
+- allow_zero_selected_with_rationale: no
+- pptpro_deck: none
+- pptpro_script: none
+- pptpro_min_pictures: 0
+
 ## Non-Negotiable Requirements
 
 ## Explicitly Forbidden Moves
@@ -434,6 +465,64 @@ def write_if_missing(path: Path, content: str) -> None:
         path.write_text(content, encoding="utf-8")
 
 
+def insert_before_if_missing(path: Path, heading: str, insertion: str, before: str) -> None:
+    if not path.exists():
+        return
+    text = path.read_text(encoding="utf-8")
+    if heading in text:
+        return
+    if before in text:
+        text = text.replace(before, insertion.rstrip() + "\n\n" + before, 1)
+    else:
+        text = text.rstrip() + "\n\n" + insertion.rstrip() + "\n"
+    path.write_text(text, encoding="utf-8")
+
+
+def migrate_state_schema(workspace_root: Path) -> None:
+    analysis = workspace_root / "10_analysis"
+    insert_before_if_missing(
+        analysis / "approval-gate.md",
+        "## Validation Profile",
+        """## Validation Profile
+
+- strict_mode: pending
+- target_90_plus: pending
+- rubric_compliance_audit: pending
+- academic_standards_audit: pending
+- source_claim_audit: pending
+- academic_quality_audit: pending
+- citation_micro_audit: pending
+- local_rule_audit: pending
+- presentation_source_audit: pending
+- student_facing_residue_audit: pending
+- source_log_validation: pending
+- source_visual_inventory_validation: pending
+- checkpro_required: pending
+- pptpro_required: pending
+- source_minimum: 3
+- preferred_recent_years: 0
+- min_recent_ratio: 0
+- visual_minimum_candidates: 2
+- allow_zero_selected_with_rationale: no
+- pptpro_deck: none
+- pptpro_script: none
+- pptpro_min_pictures: 0""",
+        "## Non-Negotiable Requirements",
+    )
+    insert_before_if_missing(
+        analysis / "final-audit.md",
+        "## Local Rule Compliance Audit",
+        "## Local Rule Compliance Audit",
+        "## Rubric Compliance Audit",
+    )
+    insert_before_if_missing(
+        analysis / "final-audit.md",
+        "## CheckPro Execution Evidence",
+        "## CheckPro Execution Evidence",
+        "## Citation Micro-Audit",
+    )
+
+
 def bootstrap(
     root: Path,
     force_inventory: bool = False,
@@ -457,6 +546,7 @@ def bootstrap(
 
     for rel, content in FILES.items():
         write_if_missing(workspace_root / rel, content)
+    migrate_state_schema(workspace_root)
 
 
 def main() -> None:

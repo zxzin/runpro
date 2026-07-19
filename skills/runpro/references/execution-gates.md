@@ -88,12 +88,13 @@ Required:
 
 - validation completed as far as feasible
 - detailed completion audit completed
-- requirement-ledger validation passes
-- final-audit validation passes
+- the locked validation profile is complete and contradiction-free
+- centralized final validation passes after the last artifact/control-file change
+- the hash-bound quality receipt is current immediately before handoff
 - student-facing residue audit validation passes for every submitted, presented, exported, or handed-off artifact
 - for academic or source-backed graded written submissions, academic-quality audit validation passes
 - for visually polished PPT/PPTX work, PPTPRO-level checks pass: recipe map, visual enrichment/image plan, generated-image handling, rounded-corner consistency, human-facing source text, rendered preview inspection, and strict audit or documented limitation
-- in `strict mode`, the requirement-lock validation chain and final validators all passed in order
+- in `strict mode`, every applicable gate selected by the validation profile passed through the centralized chain
 - no fixable audit item remains unresolved
 - all required assignment parts are complete unless a true blocker explains why they cannot be
 - the final audit judges the submission plausibly within the target `90+` band or a true blocker explains why it cannot

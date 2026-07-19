@@ -2,6 +2,8 @@
 
 Maintain these files inside the project root unless there is already a better equivalent.
 
+The full state-file set is the persistent evidence record, not the active prompt context. After requirement approval, normally keep only `approval-gate.md`, `requirement-ledger.md`, and the ledgers required by the active route in working context. Reload other unchanged state files only at their phase transition, after a relevant failure, or for final validation. Update state on meaningful changes rather than every micro-action.
+
 By default, all runpro-generated files live under `runpro_workspace/`.
 
 Keep the clean handoff folder at `runpro_workspace/submission/` so submission files stay top-level and immediately visible inside the generated workspace.
@@ -263,12 +265,14 @@ Suggested structure:
 - [ ] Important revisions applied
 - [ ] Validation completed
 - [ ] Final whole-document format check passed
+- [ ] Validation profile locked and contradiction check passed
 - [ ] Source visual inventory validated when applicable
 - [ ] Student-facing residue audit passed on final visible artifact text
 - [ ] Default report-table and process-diagram style rules were applied or explicitly overridden
 - [ ] All required assignment parts completed
 - [ ] Target score band is plausibly reachable or true blocker documented
 - [ ] Final audit passed
+- [ ] Current quality receipt generated after the last artifact change
 - [ ] Fixable failures remediated
 - [ ] Final summary written
 ```
@@ -293,10 +297,12 @@ Suggested structure:
 ## Strict-Mode Validation Chain
 ## Final Format Check
 ## Student-Facing Residue Audit
+## Local Rule Compliance Audit
 ## Rubric Compliance Audit
 ## Academic Standards Audit
 ## Source-Claim Integrity Audit
 ## Academic Quality Audit
+## CheckPro Execution Evidence
 ## Citation Micro-Audit
 ## Presentation Source Audit
 ## Requirement-By-Requirement Verdicts
@@ -506,6 +512,8 @@ Suggested structure:
 ## Required Format Or Template
 ## Explicit Formatting Requirements
 ## Default Formatting Fallback
+## Validation Profile
+### strict_mode through pptpro_min_pictures, using the exact bootstrap schema
 ## Non-Negotiable Requirements
 ## Explicitly Forbidden Moves
 ## Accepted Inferences
@@ -523,6 +531,8 @@ Rule:
 - do not begin execution until this file is approved by the user
 - derive this lock from `requirement-ledger.md`, not from memory alone
 - if the project is in `strict mode`, record that explicitly here instead of assuming it from context
+- complete every `Validation Profile` key explicitly; no `pending` value is allowed before approval
+- set validation gates from project risk and route applicability, never from desired effort; `scripts/runpro_validate.py` rejects under-scoped profiles
 - if execution later needs a different structure, template, or substitute path, return here and re-lock with the user first
 - if the assignment does specify formatting rules, record them explicitly here instead of assuming they will be remembered later
 - if the assignment does not specify font or layout rules, record the chosen standard academic fallback here instead of leaving formatting implicit
@@ -580,3 +590,19 @@ Rule:
 - do not place `final-summary.md`, audits, notes, or helper files in `runpro_workspace/submission/`
 - do not place draft `.md` files, reference templates, style samples, or duplicate format variants in `runpro_workspace/submission/` unless they are explicitly part of the required submission package
 - if the project is submitting a written artifact and the assignment does not specify another final format, keep the clean submission artifact in `.docx`
+
+## 12. `runpro_workspace/10_analysis/quality-receipt.json`
+
+Purpose:
+
+- record one centralized PASS for the locked validation profile
+- bind the PASS to hashes of RunPro state, final submission artifacts, and validator versions
+- prevent a stale pre-edit audit from being reused after late changes
+
+Rule:
+
+- create or replace this file only by running `scripts/runpro_validate.py <project-root>`
+- do not edit it manually
+- complete `final-summary.md` before generating the receipt
+- any later change to a hashed file or validator invalidates the receipt
+- immediately before handoff, run `scripts/runpro_validate.py <project-root> --check-receipt`
